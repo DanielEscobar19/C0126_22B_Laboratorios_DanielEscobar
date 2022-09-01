@@ -1,0 +1,17 @@
+﻿@*Daniel Escobar Giraldo | C02748*@
+
+@model Laboratorio3.Models.SongModel
+
+@{
+    ViewData["Title"] = "Song";
+}
+
+<h1>@ViewBag.MainTitle</h1>
+
+<div>
+    <p>Name: @Model.Name</p>
+    <p>Artist: @Model.Artist</p>
+    <p>Genre: @Model.Genre</p>
+    <p>Duration: @Model.Duration</p>
+    <p>ReleaseDate: @Model.ReleaseDate</p>
+</div>
