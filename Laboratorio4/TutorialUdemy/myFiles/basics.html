@@ -6,64 +6,108 @@
   </head>
 
   <body>
-    <p>Hola mundo</p>
+      <p>Hola mundo</p>
 
-    Hola mundo <br>
-    Hola mundo <br>
-    Hola mundo <br>
-    Hola mundo <br>
+      Hola mundo <br>
+      Hola mundo <br>
+      Hola mundo <br>
+      Hola mundo <br>
 
-    <h1>Hola mundo</h1>
-    <h2>Hola mundo</h2>
-    <h3>Hola mundo</h3>
-    <h4>Hola mundo</h4>
-    <h5>Hola mundo</h5>
-    <h6>Hola mundo</h6>
-    <p>Testing</p>
+      <h1>Hola mundo</h1>
+      <h2>Hola mundo</h2>
+      <h3>Hola mundo</h3>
+      <h4>Hola mundo</h4>
+      <h5>Hola mundo</h5>
+      <h6>Hola mundo</h6>
+      <p>Testing</p>
 
-    <ul>
-      <li>Hola</li>
-      <li>adios</li>
-    </ul>
+      <ul>
+          <li>Hola</li>
+          <li>adios</li>
+      </ul>
 
-    <p>style="list-style-type: decimal</p>
-    <ul style="list-style-type: decimal;">
-      <li>Hola</li>
-      <li>adios</li>
-    </ul>
-      
-    <ol>
-      <li>Hola</li>
-      <li>adios</li>
-    </ol>
-    <ol type="a">
-      <li>Hola</li>
-      <li>adios</li>
-    </ol>
+      <p>style="list-style-type: decimal</p>
+      <ul style="list-style-type: decimal;">
+          <li>Hola</li>
+          <li>adios</li>
+      </ul>
 
-    <table border="2">
-      <tr>
-        <th>First</th>
-        <th>Second</th>
-        <th>Third</th>
-      </tr>
-      <tr>
-        <td>HTML</th>
-        <td>CSS</th>
-        <td>CSharp</th>
-      </tr>
-    </table>
+      <ol>
+          <li>Hola</li>
+          <li>adios</li>
+      </ol>
+      <ol type="a">
+          <li>Hola</li>
+          <li>adios</li>
+      </ol>
 
-    <h1>Adding images </h1>
-    <p>My default _blank link <a href="https://udemy.com" target="_blank">Udemy</a></p>
-    <p>My default _top link <a href="https://udemy.com" target="_top">Udemy</a></p>
-    <p>My default _parent link <a href="https://udemy.com" target="_parent">Udemy</a></p>
-    <p>My default _self link <a href="https://udemy.com" target="_self">Udemy</a></p>
+      <table border="2">
+          <tr>
+              <th>First</th>
+              <th>Second</th>
+              <th>Third</th>
+          </tr>
+          <tr>
+              <td>HTML</th>
+              <td>CSS</th>
+              <td>CSharp</th>
+          </tr>
+      </table>
 
-    <p>My default image is</p>
-    <a href="https://udemy.com" target="_blank"> <img src="img/frog.jpg" width=50% /> </a>
+      <h1>Adding images </h1>
+      <p>My default _blank link <a href="https://udemy.com" target="_blank">Udemy</a></p>
+      <p>My default _top link <a href="https://udemy.com" target="_top">Udemy</a></p>
+      <p>My default _parent link <a href="https://udemy.com" target="_parent">Udemy</a></p>
+      <p>My default _self link <a href="https://udemy.com" target="_self">Udemy</a></p>
 
-    
+      <p>My default image is</p>
+      <a href="https://udemy.com" target="_blank"> <img src="img/frog.jpg" width=50% /> </a>
 
+      <div>Hello World</div> <div>Hello world</div>
+
+      <div>Hello <span> <em>Hello</em> <strong>World</strong></span> World</div>
+      <p>La opcion <strong><em>span</em></strong> marca un pequño espacio antes y despues del text</p>
+      <p>La opcion <strong> <em>div</em> </strong> realiza un salo de linea</p>
+
+
+      <div style="border:solid #FF0004" 2px> Prueba de estilos</div>
+      <p>Esto muestra que los divs son bloques que toman todo el espacio [el cuadro rojo toma la parte en blanco] mientras que los span son inline y no bloques</p>
+       
+      <span style="border:red dashed 1px; background:gray; color:white; padding:5px" >Prueba de style con span</span> 
+
+
+
+      <h1>Como se hace un form simple</h1>
+      <form action="Home" method="get">
+          <label for="cancion"> Cancion favorita: </label>
+          <input style="border:dashed red 1px" type="text" name="cancion" value="" />
+          <br />
+          <br />
+
+          <textarea rows="5" cols="20"> Some text </textarea>
+          <br />
+          <select>
+              <option value="1">1</option>
+              <option value="2">2</option>
+
+          </select>
+          <br />
+          <input type="checkbox" name="checkbox1" value="4" />
+          <label for="cancion">4</label>
+          <input type="checkbox" name="checkbox2" value="5" />
+          <label for="cancion">5</label>
+          <br />
+          <br />
+          <input  type="radio" name="radio1" value="6" />
+          <label for="cancion">6</label>
+          <input type="radio" name="radio2" value="7" />
+          <label for="cancion">7</label>
+          <br />
+          <br />
+          <input type="date" name="fecha" value="7" />
+          <br />
+
+          <input type="submit" value="Submit" />
+      </form>
   </body>
 </html>
