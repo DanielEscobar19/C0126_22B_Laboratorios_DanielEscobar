@@ -1,5 +1,31 @@
 @charset "utf-8";
 
+div {
+    background: #D0D0D0;
+    color: #5B64FF
+    margin: 220px;
+    width: 100%;
+    text-align:justify;
+}
+
+#newspan {
+    background: #ffffff;
+    color: #f25e5e;
+
+}
+
+.newSpanClass {
+    color: #ff6a00;
+    font-weight: bold;
+    font-size: 18px;
+    font-style: italic;
+}
+
+img {
+    width: 50%;
+    align-content: center;
+    align-items: center;
+}
 
 nav ul {
     list-style-type: none;
@@ -8,4 +34,28 @@ nav ul {
     overflow: hidden;
     background-color: #444;
     text-align: center;
+}
+
+
+nav li {
+    float: left;
+    font-family: 'Segoe MDL2 Assets', "Segoe UI", "DejaVu Sans", "Tebuchet MS", Verdana, sans-serif;
+    font-size: 1.2em;
+    line-height: 40px;
+    height: 40px;
+    border-bottom: 1px solid #393434;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    text-transform: uppercase;
+    padding: 4px;
+    font-weight: bold;
+    width: 120px;
+}
+
+nac a:hover, a:active {
+    background-color: #009BFF;
 }
