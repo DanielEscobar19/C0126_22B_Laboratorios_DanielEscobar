@@ -21,10 +21,16 @@ div {
     font-style: italic;
 }
 
+#miCaja {
+    border: solid;
+    margin: 20px;
+    text-align: center;
+    width: 50%;
+    border-radius: 10px;
+}
+
 img {
     width: 50%;
-    align-content: center;
-    align-items: center;
 }
 
 nav ul {
@@ -53,7 +59,7 @@ nav a {
     text-transform: uppercase;
     padding: 4px;
     font-weight: bold;
-    width: 120px;
+    width: 200px;
 }
 
 nac a:hover, a:active {
