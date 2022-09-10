@@ -5,20 +5,24 @@
     <title>Un form basico</title>
 </head>
 <body>
-    <header>Esto es un form de prueba</header>
+    <header> 
+        <h1>Estos son elementos utilizados en forms</h1>
+    </header>
 
     <section>
         <form action="#" method="get">
+            <div style="border: 2px solid black; width: 50%; padding: 10px">
+                <h2>Informacion de metodos</h2>
+                <p>
+                    Existen los metodos post y get. <br />
+                    Post envia los datos en el cotenido del mensjae y no en el uri. <br />
+                    Get envia los datos atraves del uri
+                </p>
+            </div>
+            <br />
+            <br />
             <label>Correo</label>
             <input type="email" name="correo" value="" />
-
-            <br />
-            <br />
-
-            <label>Descripcion del producto</label>
-            <br />
-
-            <textarea rows="15" cols="20">Describa un producto</textarea>
 
             <br />
             <br />
@@ -49,13 +53,19 @@
 
             <br><br>
 
-            <h2 style="color: yellowgreen;">Text area</h2>
             <label for="text">My thoughts:</label><br>
-            <textarea name="text" id="text" cols="30" rows="10"
-                      placeholder="This a text field, you can write down anything that comes to your mind"></textarea>
+            <textarea name="text" id="text" cols="30" rows="10" placeholder="This a text field, you can write down anything that comes to your mind."></textarea>
+            <br><br>
+
+            <label for="range1">Esto es un range</label> <br />
+            <input type="range" name="range1" value="" />
 
             <br><br>
 
+            <label for="url1">Ingrese un url</label> <br />
+            <input type="url" name="url1" value="" placeholder="ejemplo: youtube.com" />
+
+            <br><br>
             <input type="submit" name="" id="" value="submit the form">
         </form>
 
