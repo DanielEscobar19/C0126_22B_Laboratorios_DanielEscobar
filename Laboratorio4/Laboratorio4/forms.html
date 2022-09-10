@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html>
+<head>
+    <title>Un form basico</title>
+</head>
+<body>
+    <header>Esto es un form de prueba</header>
+
+    <section>
+        <form action="#" method="get">
+            <label>Correo</label>
+            <input type="email" name="correo" value="" />
+
+            <br />
+            <br />
+
+            <label>Descripcion del producto</label>
+            <br />
+
+            <textarea rows="15" cols="20">Describa un producto</textarea>
+
+            <br />
+            <br />
+            <h2>Checkbox con seleccion multiple</h2>
+            <label for="opcion1">Opcion 1</label>
+            <input type="checkbox" name="grupo1" id="opcion1" value="1" />
+            <br />
+            <label for="opcion2">Opcion 2</label>
+            <input type="checkbox" name="grupo1" id="opcion2" value="2" />
+
+            <h2>Checkbox con seleccion unica</h2>
+            <label for="opcion1.1">Opcion1.1</label>
+            <input type="radio" name="grupo2" id="opcion1.1" value="1" />
+            <br />
+            <label for="opcion2.1">Opcion2.1</label>
+            <input type="radio" name="grupo2" id="opcion2.1" value="2" />
+
+            <h2>Tipos de html 5</h2>
+            <label>Introduzca una fecha:</label>
+            <input type="date" name="fecha" value="" />
+            <br />
+            <label for="options">Dropdown box:</label>
+            <select name="options" id="options">
+                <option value="0">number 0</option>
+                <option value="1">number 1</option>
+                <option value="2">number 2</option>
+            </select>
+
+            <br><br>
+
+            <h2 style="color: yellowgreen;">Text area</h2>
+            <label for="text">My thoughts:</label><br>
+            <textarea name="text" id="text" cols="30" rows="10"
+                      placeholder="This a text field, you can write down anything that comes to your mind"></textarea>
+
+            <br><br>
+
+            <input type="submit" name="" id="" value="submit the form">
+        </form>
+
+    </section>
+
+</body>
+</html>
