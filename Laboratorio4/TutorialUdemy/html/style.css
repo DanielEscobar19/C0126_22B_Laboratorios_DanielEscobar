@@ -2,7 +2,7 @@
 
 div {
     background: #D0D0D0;
-    color: #5B64FF
+    color: #5B64FF;
     margin: 220px;
     width: 100%;
     text-align:justify;
@@ -25,7 +25,7 @@ div {
     border: solid;
     margin: 20px;
     text-align: center;
-    width: 50%;
+    width: 95%;
     border-radius: 10px;
 }
 
@@ -62,6 +62,6 @@ nav a {
     width: 200px;
 }
 
-nac a:hover, a:active {
+nav a:hover, a:active {
     background-color: #009BFF;
 }
