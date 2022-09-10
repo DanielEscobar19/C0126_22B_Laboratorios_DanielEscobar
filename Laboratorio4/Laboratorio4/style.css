@@ -7,6 +7,26 @@ img {
     width: 50%;
 }
 
+body {
+    margin: 0px;
+    padding: 0px;
+    overflow: overlay;
+}
+
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background: #3e3e3eed;
+    border-radius: 25px;
+    height: 20%;
+}
+
+body::-webkit-scrollbar-track {
+    background: #00000000;
+}
+
 header {
     margin: 0px;
     padding: 0px;
@@ -62,4 +82,13 @@ nav a:hover, a:active {
 footer {
     text-align: center;
     padding: 10px;
+}
+
+#TituloImagen {
+    margin-left: 20px;
+}
+
+.contenidoPrincipal {
+    padding-inline: 50px;
+    text-align: justify;
 }
