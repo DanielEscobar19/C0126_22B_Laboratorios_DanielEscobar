@@ -1,0 +1,26 @@
+﻿@model List<Laboratorio5.Models.PeliculaModel>;
+@{
+    ViewData["Title"] = "Películas";
+}
+<link rel="stylesheet" href="_Index.cshtml.css" asp-append-version="true" />
+
+<h1>@ViewBag.MainTitle</h1>
+
+<div>
+    <table class="table">
+        <thread>
+            <tr>
+                <th>Título de la película</th>
+                <th>Año de salida</th>
+            </tr>
+        </thread>
+        <tbody>
+            @foreach (var item in Model){
+                <tr>
+                    <td>@item.Nombre</td>
+                    <td>@item.Año</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
