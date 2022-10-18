@@ -16,9 +16,9 @@ namespace Laboratorio5.Controllers
             PeliculasHandler peliculasHandler = new PeliculasHandler();
             var peliculas = peliculasHandler.ObtenerPeliculas();
             ViewBag.MainTitle = "Lista de Peliculas";
-            if (TempData["ExitoDeBorrado"] != null)
+            if (TempData["MensajeError"] != null)
             {
-                ViewBag.ExitoDeBorrado = TempData["ExitoDeBorrado"];
+                ViewBag.MensajeError = TempData["MensajeError"];
             }
             return View(peliculas);
         }
@@ -103,17 +103,17 @@ namespace Laboratorio5.Controllers
                 var pelicula = peliculasHandler.ObtenerPeliculas().Find(model => model.ID == identificador);
                 if (pelicula == null)
                 {
-                    TempData["ExitoDeBorrado"] = @"El identificador @identificador no coincide con ninguna película";
+                    TempData["MensajeError"] = @"El identificador @identificador no coincide con ninguna película";
                 }
                 else
                 {
                     peliculasHandler.BorrarPelicula(pelicula);
-                    TempData["ExitoDeBorrado"] = "La película " + pelicula.Nombre + " ha sido borrada con éxito";
+                    TempData["MensajeError"] = "La película " + pelicula.Nombre + " ha sido borrada con éxito";
                 }
             }
             catch
             {
-                TempData["ExitoDeBorrado"] = @"El identificador @identificador no coincide con ninguna película";
+                TempData["MensajeError"] = @"El identificador @identificador no coincide con ninguna película";
             }
             return RedirectToAction("Index");
         }
