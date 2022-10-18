@@ -1,0 +1,48 @@
+﻿@*
+	Daniel Escobar Giraldo | C02748
+*@
+
+@model PeliculaModel
+@{
+	ViewBag.Title = "Crear película";
+}
+
+<html>
+<head>
+	<title>@ViewBag.Title</title>
+</head>
+<body>
+
+	@if (ViewBag.Message != null)
+	{
+		@*if (ViewBag.ExitoAlCrear)
+		{
+			<div class="alert-success"> <h3>@ViewBag.Message</h3> </div>
+		}
+		else
+		{
+			<div class="alert-danger"> <h3>@ViewBag.Message</h3> </div>
+		}*@
+	}
+	@using (Html.BeginForm("EditarPelicula", "Peliculas", FormMethod.Post, new { enctype = "multipart/form-data" }))
+	{
+		@Html.AntiForgeryToken()
+		<h1>Editar película</h1>
+		@Html.HiddenFor(model=>model.ID)
+		<div class="form-horizontal">
+			<div class="form-group">
+				@Html.LabelFor(model => model.Nombre)
+				@Html.TextBoxFor(model => model.Nombre, new {@class = "form-control"})
+				@Html.ValidationMessageFor(model => model.Nombre, "", new {@class = "text-danger"})
+			</div>
+			<div class="form-group">
+				@Html.LabelFor(model => model.Año)
+				@Html.TextBoxFor(model => model.Año, new {@class = "form-control"})
+				@Html.ValidationMessageFor(model => model.Año, "", new {@class = "text-danger"})
+			</div>
+			<input type="submit" class="btn btn-success" value="Guardar" />
+		</div>
+	}
+	<hr />
+</body>
+</html>

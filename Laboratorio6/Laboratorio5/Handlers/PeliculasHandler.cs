@@ -49,5 +49,47 @@ namespace Laboratorio5.Handlers
             }
             return peliculas;
         }
+        public bool CrearPelicula(PeliculaModel pelicula)
+        {
+            var consulta = @"INSERT INTO [dbo].[Pelicula] ([Nombre],[Año]) VALUES(@Nombre, @Año)";
+
+            var comandoParaConsulta = new SqlCommand(consulta, conexion);
+            comandoParaConsulta.Parameters.AddWithValue("@Nombre", pelicula.Nombre);
+            comandoParaConsulta.Parameters.AddWithValue("@Año", pelicula.Año);
+            conexion.Open();
+
+            bool exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
+            conexion.Close();
+            return exito;
+        }
+        public bool EditarPelicula(PeliculaModel pelicula)
+        {
+            var consulta = @"UPDATE [dbo].[Pelicula] SET Nombre = @Nombre, Año = @Año WHERE ID = @ID";
+
+            var comandoParaConsulta = new SqlCommand(consulta, conexion);
+            comandoParaConsulta.Parameters.AddWithValue("@Nombre", pelicula.Nombre);
+            comandoParaConsulta.Parameters.AddWithValue("@Año", pelicula.Año);
+            comandoParaConsulta.Parameters.AddWithValue("@ID", pelicula.ID);
+            conexion.Open();
+
+            bool exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
+            conexion.Close();
+            return exito;
+        }
+        public bool BorrarPelicula(PeliculaModel pelicula)
+        {
+            var consulta = @"Delete [dbo].[pelicula] WHERE ID = @ID";
+
+            var comandoParaConsulta = new SqlCommand(consulta, conexion);
+            comandoParaConsulta.Parameters.AddWithValue("@ID", pelicula.ID);
+            conexion.Open();
+
+            bool exito = comandoParaConsulta.ExecuteNonQuery() >= 1;
+            conexion.Close();
+            return exito;
+        }
+        /*
+            Daniel Escobar Giraldo | C02748
+         */
     }
 }
