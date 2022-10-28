@@ -13,7 +13,7 @@
 
         public double SquareRoot(double input)
         {
-            throw new NotImplementedException();
+            return input / 2;
         }
     }
 } // Daniel Escobar Giraldo | C02748
