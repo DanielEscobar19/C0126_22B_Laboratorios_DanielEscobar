@@ -19,4 +19,4 @@ namespace MathTests
             Assert.AreEqual(expectedResult, actualResult, delta: expectedResult / 100);
         }
     }
-}
+}  // Daniel Escobar Giraldo | C02748
