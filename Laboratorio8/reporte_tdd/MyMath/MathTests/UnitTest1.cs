@@ -38,5 +38,12 @@ namespace MathTests
             double actualResult = rooter.SquareRoot(input);
             Assert.AreEqual(expectedResult, actualResult, delta: expectedResult / 1000);
         }
+
+        [TestMethod]
+        public void RooterTestNegativeInput()
+        {
+            Rooter rooter = new Rooter();
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => rooter.SquareRoot(-1));
+        }
     }
 }  // Daniel Escobar Giraldo | C02748
