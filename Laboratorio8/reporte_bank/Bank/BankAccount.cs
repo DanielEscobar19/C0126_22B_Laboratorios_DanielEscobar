@@ -40,8 +40,8 @@ namespace BankAccountNS
                 throw new ArgumentOutOfRangeException("amount");
             }
 
-            m_balance += amount; // intentionally incorrect code
-        }
+            m_balance -= amount; // linea corregida
+        } // Daniel Escobar Giraldo | C02748
 
         public void Credit(double amount)
         {
