@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace app_source.Models
 {
@@ -13,6 +15,7 @@ namespace app_source.Models
         [Required(ErrorMessage = "Debe indicar el nombre de la empresa")]
         [StringLength(256, ErrorMessage = "El nombre de la empresa debe tener menos de 256 carácteres")]
         [DisplayName("Nombre de la empresa:")]
+        [Remote("IsCompanyNameAvailable", "Company", AdditionalFields = nameof(Id), HttpMethod = "POST", ErrorMessage = "Ya existe una empresa con este nombre")]
         public string? Nombre { get; set; }
 
         // el tipo de negocio es muy variado
