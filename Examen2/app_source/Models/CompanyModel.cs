@@ -30,11 +30,10 @@ namespace app_source.Models
         // valor estimado total de la empresa
         // puede ser un numero real
         [DisplayName("Valor estimado de la empresa:")]
-        [DefaultValue(0)]
         public decimal ValorEstimado { get; set; }
 
         // true si es transacional y false en caso contrario
         [Required(ErrorMessage = "Debe indicar si la empresa es trasnacional")]
-        public bool EsTransacional { get; set; }
+        public bool EsTransnacional { get; set; }
     }
 }

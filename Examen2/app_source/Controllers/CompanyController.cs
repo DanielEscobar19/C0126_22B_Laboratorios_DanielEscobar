@@ -54,7 +54,7 @@ namespace app_source.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransacional")] CompanyModel companyModel)
+        public async Task<IActionResult> Create([Bind("Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransnacional")] CompanyModel companyModel)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace app_source.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransacional")] CompanyModel companyModel)
+        public async Task<IActionResult> Edit(string id, [Bind("Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransnacional")] CompanyModel companyModel)
         {
             if (id != companyModel.Nombre)
             {
