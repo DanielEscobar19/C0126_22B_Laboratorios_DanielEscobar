@@ -9,6 +9,7 @@ namespace app_source.Models
         [Required(ErrorMessage = "Debe indicar el nombre de la empresa")]
         [StringLength(256, ErrorMessage = "El nombre de la empresa debe tener menos de 256 carácteres")]
         [DisplayName("Nombre de la empresa:")]
+        [Key] // el nombre sera la llave en la base de datos
         public string? Nombre { get; set; }
 
         // el tipo de negocio es muy variado
