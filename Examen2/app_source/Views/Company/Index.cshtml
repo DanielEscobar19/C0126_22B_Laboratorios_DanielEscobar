@@ -37,16 +37,42 @@
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.TipoNegocio)
+                @if (item.TipoNegocio == null) {
+                    <p>Desconocido</p>
+                } else
+                {
+                    @Html.DisplayFor(modelItem => item.TipoNegocio)
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PaisBase)
+                @if (item.PaisBase == null)
+                {
+                     <p>Desconocido</p>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.PaisBase)
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ValorEstimado)
+                @if (item.ValorEstimado == null)
+                {
+                    <p>Desconocido</p>
+                }
+                else
+                {
+                    @Html.DisplayFor(modelItem => item.ValorEstimado)
+                }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.EsTransnacional)
+                @if (item.EsTransnacional == true)
+                {
+                    <p>Sí</p>
+
+                } else
+                {
+                    <p>No</p>
+                }
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
