@@ -25,6 +25,32 @@ namespace app_source.Controllers
               return View(await _context.CompanyModel.ToListAsync());
         }
 
+        // Post: checks company availability
+        [HttpPost]
+        public JsonResult IsCompanyNameAvailable(string nombre, int id)
+        {
+            bool nombreValido = false;
+            var actualCompany = _context.CompanyModel.Find(id);
+
+            if (actualCompany == null)
+            {
+                // actualCompany == null significa que no existe el negocio
+                // situacion de creacion de la empresa
+                nombreValido = !_context.CompanyModel.Any(x => x.Nombre.ToLower() == nombre.ToLower());
+            } else if(actualCompany.Nombre == nombre)
+            {
+                // actualCompany != null significa que si existe la empresa y se esta actualizando su nombre
+                // situacion de update del nombre de la empresa
+                // si el nombre en la base es igual al nuevo nombre se permite la actualizacion
+                nombreValido = true;
+            } else
+            {
+                // si el nuevo nombre no es igual al que esta en la base se debe verificar si esta disponible el nombre nuevo
+                nombreValido = !_context.CompanyModel.Any(x => x.Nombre.ToLower() == nombre.ToLower());
+            }
+            return Json(nombreValido);
+        }
+
         // GET: Company/Create
         public IActionResult Create()
         {
