@@ -26,7 +26,7 @@ namespace app_source.Controllers
         }
 
         // GET: Company/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.CompanyModel == null)
             {
@@ -34,7 +34,7 @@ namespace app_source.Controllers
             }
 
             var companyModel = await _context.CompanyModel
-                .FirstOrDefaultAsync(m => m.Nombre == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (companyModel == null)
             {
                 return NotFound();
@@ -54,7 +54,7 @@ namespace app_source.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransnacional")] CompanyModel companyModel)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransnacional")] CompanyModel companyModel)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace app_source.Controllers
         }
 
         // GET: Company/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.CompanyModel == null)
             {
@@ -86,9 +86,9 @@ namespace app_source.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransnacional")] CompanyModel companyModel)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransnacional")] CompanyModel companyModel)
         {
-            if (id != companyModel.Nombre)
+            if (id != companyModel.Id)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace app_source.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompanyModelExists(companyModel.Nombre))
+                    if (!CompanyModelExists(companyModel.Id))
                     {
                         return NotFound();
                     }
@@ -117,7 +117,7 @@ namespace app_source.Controllers
         }
 
         // GET: Company/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.CompanyModel == null)
             {
@@ -125,7 +125,7 @@ namespace app_source.Controllers
             }
 
             var companyModel = await _context.CompanyModel
-                .FirstOrDefaultAsync(m => m.Nombre == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (companyModel == null)
             {
                 return NotFound();
@@ -137,7 +137,7 @@ namespace app_source.Controllers
         // POST: Company/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.CompanyModel == null)
             {
@@ -153,9 +153,9 @@ namespace app_source.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CompanyModelExists(string id)
+        private bool CompanyModelExists(int id)
         {
-          return _context.CompanyModel.Any(e => e.Nombre == id);
+          return _context.CompanyModel.Any(e => e.Id == id);
         }
     }
 }

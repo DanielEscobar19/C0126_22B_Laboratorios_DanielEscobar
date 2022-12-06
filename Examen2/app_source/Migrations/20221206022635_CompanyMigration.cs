@@ -14,6 +14,8 @@ namespace appsource.Migrations
                 name: "CompanyModel",
                 columns: table => new
                 {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Nombre = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     TipoNegocio = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     PaisBase = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -22,7 +24,7 @@ namespace appsource.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CompanyModel", x => x.Nombre);
+                    table.PrimaryKey("PK_CompanyModel", x => x.Id);
                 });
         }
 

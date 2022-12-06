@@ -12,7 +12,7 @@ using app_source.Data;
 namespace appsource.Migrations
 {
     [DbContext(typeof(CompanyContext))]
-    [Migration("20221206021451_CompanyMigration")]
+    [Migration("20221206022635_CompanyMigration")]
     partial class CompanyMigration
     {
         /// <inheritdoc />
@@ -27,12 +27,19 @@ namespace appsource.Migrations
 
             modelBuilder.Entity("app_source.Models.CompanyModel", b =>
                 {
-                    b.Property<string>("Nombre")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("EsTransnacional")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("PaisBase")
                         .HasMaxLength(256)
@@ -45,7 +52,7 @@ namespace appsource.Migrations
                     b.Property<decimal?>("ValorEstimado")
                         .HasColumnType("decimal(18,2)");
 
-                    b.HasKey("Nombre");
+                    b.HasKey("Id");
 
                     b.ToTable("CompanyModel");
                 });
