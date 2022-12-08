@@ -35,11 +35,10 @@
 
             <label asp-for="ValorEstimado" class="control-label"></label>
             <div class="input-group mb-3">
-                <span class="input-group-text" id="inputGroup-sizing-default"><i class="bi bi-currency-dollar"></i></span>
+                <span class="input-group-text" id="inputGroup-sizing-default"><i class="bi bi-coin"></i></span>
                 <input asp-for="ValorEstimado" class="form-control" />
                 <span asp-validation-for="ValorEstimado" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" class="text-danger"></span>
             </div>
-
 
             <div class="input-group mb-3">
                 <div class="input-group-text">
@@ -48,7 +47,7 @@
                 <p class="form-control m-0"> @Html.DisplayNameFor(model => model.EsTransnacional) </p>
             </div>
             <div class="d-flex justify-content-center">
-                <input type="submit" value="Create" class="me-2 btn btn-success" />
+                <input type="submit" value="Agregar" class="me-2 btn btn-success" />
                 <a asp-action="Index" class="ms-2 btn btn-danger">Cancelar</a>
             </div>
         </form>
