@@ -1,6 +1,6 @@
 namespace unit_tests
 {
-    public class UnitTest1
+    public class CompanyControlerTest
     {
         [Fact]
         public void Test1()
