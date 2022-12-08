@@ -22,7 +22,9 @@ namespace app_source.Controllers
         // GET: Company
         public async Task<IActionResult> Index()
         {
-              return View(await _context.CompanyModel.ToListAsync());
+            List<CompanyModel> sortedCompanies = (await _context.CompanyModel.ToListAsync()).OrderBy(x => x.Id).ToList();
+            sortedCompanies.Reverse();
+            return View(sortedCompanies);
         }
 
         // Post: checks company availability
