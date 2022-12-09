@@ -51,7 +51,7 @@ namespace appsource.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CompanyModel");
+                    b.ToTable("CompanyModel", (string)null);
                 });
 #pragma warning restore 612, 618
         }
