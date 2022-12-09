@@ -29,6 +29,21 @@ namespace app_source.Controllers
         }
 
         // Post: checks company availability
+        /// <summary>
+        ///  metodo que verifica queno se creen nombres de empresa repetidos en la base de datos
+        /// </summary>
+        /// <remarks>
+        ///  en caso de ser una creacion de empresa el metodo revisa que no exista otra empresa conel mismo nombre
+        ///  en caso de ser una actualizacion se verifica que no haya otra empresa con el mismo nombre 
+        ///  pero en caso de que el nombre no haya sido modificado se acepta que se ingrese el mismo nombre
+        ///  si no se diferencia entre actualizacion y creacion el metodo no permitiria que se actualice un puesto sin modificar el nombre
+        ///  porque en la base si existe su propio nombre por lo que creeria que no esta disponible
+        /// </remarks>
+        /// <param name="nombre"></param>
+        /// <param name="id"></param>
+        /// <returns>
+        ///  true si el nombre esta disponible, false en cualquier otro caso
+        /// </returns>
         [HttpPost]
         public JsonResult IsCompanyNameAvailable(string nombre, int id)
         {
@@ -82,13 +97,13 @@ namespace app_source.Controllers
         {
             if (id == null || _context.CompanyModel == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
 
             var companyModel = await _context.CompanyModel.FindAsync(id);
             if (companyModel == null)
             {
-                return NotFound();
+                return View("NotFound");
             }
             return View(companyModel);
         }
@@ -101,7 +116,8 @@ namespace app_source.Controllers
         {
             if (id != companyModel.Id)
             {
-                return NotFound();
+                Response.StatusCode = StatusCodes.Status404NotFound;
+                return View("NotFound");
             }
 
             if (ModelState.IsValid)
@@ -132,14 +148,16 @@ namespace app_source.Controllers
         {
             if (id == null || _context.CompanyModel == null)
             {
-                return NotFound();
+                Response.StatusCode = StatusCodes.Status404NotFound;
+                return View("NotFound");
             }
 
             var companyModel = await _context.CompanyModel
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (companyModel == null)
             {
-                return NotFound();
+                Response.StatusCode = StatusCodes.Status404NotFound;
+                return View("NotFound");
             }
 
             return View(companyModel);
