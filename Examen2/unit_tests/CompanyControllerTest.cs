@@ -32,28 +32,12 @@ public class CompanyControllerTest
     }
 
     [Test]
-    public async Task IsCompanyNameAvailable_ReturnsFalse_WhenCreatingNewRepeatedName()
+    public void IsCompanyNameAvailable_ReturnsFalse_WhenCreatingNewRepeatedName()
     {
         // arrange
-        // ingresamos empresas cualquiera
-        // creamos lista con empresas de prueba
-        for (int i = 0; i < 4; ++i)
-        {
-            CompanyModel tempCompany = new CompanyModel
-            {
-                // solo asignamos un nombre porque nos interesa probrar si se peude repetir nombres
-                Nombre = $"Testing {i} {UNIQUEID}",
-            };
-            // ingresamos en la base y y actualizamos el modelo actual
-            // la actualizacion es para recibir el numero de id que asigna la base
-            tempCompany = DbContext.Add(tempCompany).Entity;
-
-            EmpresasSemilla.Add(tempCompany);
-        }
-
-        // guardamos en la base los cambios realizados
-        await DbContext.SaveChangesAsync();
-
+        // insertamos los puestos semilla de prueba
+        Helper.InsertarEmpresasSemilla(ref EmpresasSemilla, DbContext, UNIQUEID);
+        
         // creamos una empresa que tiene el nombre repetido y que no esta en la base de datos
         // esto significa que es la situacion de la vista de creacion
         // el modelo no tiene id porque no ha sido ingresado a la base
@@ -72,27 +56,11 @@ public class CompanyControllerTest
     }
 
     [Test]
-    public async Task IsCompanyNameAvailable_ReturnsTrue_WhenCreatingNewNotRepeatedName()
+    public void IsCompanyNameAvailable_ReturnsTrue_WhenCreatingNewNotRepeatedName()
     {
         // arrange
-        // ingresamos empresas cualquiera
-        // creamos lista con empresas de prueba
-        for (int i = 0; i < 4; ++i)
-        {
-            CompanyModel tempCompany = new CompanyModel
-            {
-                // solo asignamos un nombre porque nos interesa probrar si se peude repetir nombres
-                Nombre = $"Testing {i} {UNIQUEID}",
-            };
-            // ingresamos en la base y y actualizamos el modelo actual
-            // la actualizacion es para recibir el numero de id que asigna la base
-            tempCompany = DbContext.Add(tempCompany).Entity;
-
-            EmpresasSemilla.Add(tempCompany);
-        }
-
-        // guardamos en la base los cambios realizados
-        await DbContext.SaveChangesAsync();
+        // insertamos los puestos semilla de prueba
+        Helper.InsertarEmpresasSemilla(ref EmpresasSemilla, DbContext, UNIQUEID);
 
         // creamos una empresa que tiene el nombre repetido y que no esta en la base de datos
         // esto significa que es la situacion de la vista de creacion
@@ -112,27 +80,11 @@ public class CompanyControllerTest
     }
 
     [Test]
-    public async Task IsCompanyNameAvailable_ReturnsTrue_WhenUpdatingAndNotChangingName()
+    public void IsCompanyNameAvailable_ReturnsTrue_WhenUpdatingAndNotChangingName()
     {
         // arrange
-        // ingresamos empresas cualquiera
-        // creamos lista con empresas de prueba
-        for (int i = 0; i < 4; ++i)
-        {
-            CompanyModel tempCompany = new CompanyModel
-            {
-                // solo asignamos un nombre porque nos interesa probrar si se peude repetir nombres
-                Nombre = $"Testing {i} {UNIQUEID}",
-            };
-            // ingresamos en la base y y actualizamos el modelo actual
-            // la actualizacion es para recibir el numero de id que asigna la base
-            tempCompany = DbContext.Add(tempCompany).Entity;
-
-            EmpresasSemilla.Add(tempCompany);
-        }
-
-        // guardamos en la base los cambios realizados
-        await DbContext.SaveChangesAsync();
+        // insertamos los puestos semilla de prueba
+        Helper.InsertarEmpresasSemilla(ref EmpresasSemilla, DbContext, UNIQUEID);
 
         // como estamos actualizando usamos uno de los modelos que ya estan en la base
         // modifcamos otro atributo que no sea el nombre
@@ -144,7 +96,7 @@ public class CompanyControllerTest
         // assert
         bool? result = AssertTypeOfJsonResutl(resultadoJson);
 
-        Assert.IsTrue(result, $"Se retorno {result} y debió ser true porque se está actuaizando una empresa pero no se modifico el nombre por lo que se permite la actualización.");
+        Assert.IsTrue(result, $"Se retorno {result} y debió ser true porque se está actualizando una empresa pero no se modifico el nombre por lo que se permite la actualización.");
     }
 
     private static bool? AssertTypeOfJsonResutl(JsonResult controllerResult)
@@ -160,4 +112,59 @@ public class CompanyControllerTest
         }
         return result;
     }
+
+    [Test]
+    public async Task GetEdit_ReturnsEditViewWithCorrespondingModel()
+    {
+        // arrange
+        // insertamos los puestos semilla de prueba
+        Helper.InsertarEmpresasSemilla(ref EmpresasSemilla, DbContext, UNIQUEID);
+
+        // copiamos los datos esperados porque el paso de modelos es por referencia
+        // por lo tanto si comparamos los modelos siemrpe van a tener mismos datos porque hacen referencia al mismo
+        int idEsperado = EmpresasSemilla[2].Id;
+        string nombreEsperado = EmpresasSemilla[2].Nombre;
+        string tipoEsperado = EmpresasSemilla[2].TipoNegocio;
+        string paisEsperado = EmpresasSemilla[2].PaisBase;
+        Decimal? valorEsperado = EmpresasSemilla[2].ValorEstimado;
+        bool esTransnacionalEsperado = EmpresasSemilla[2].EsTransnacional;
+
+        // action
+        var viewResult = await CompanyController.Edit(EmpresasSemilla[2].Id) as ViewResult;
+
+        // assert
+        var actualCompany = viewResult.ViewData.Model as CompanyModel;
+
+        AssertComapanyModelType(actualCompany);
+
+        // comparamos que sean el mismo modelo
+        Assert.That(actualCompany, Is.Not.Null, "El modelo de la vista es nulo");
+        Assert.That(actualCompany.Id, Is.EqualTo(idEsperado), $"El id del modelo no es el esperado. Se esperaba {idEsperado}");
+        Assert.That(actualCompany.Nombre, Is.EqualTo(nombreEsperado), $"El nombre del modelo no es el esperado. Se esperaba {nombreEsperado}");
+        Assert.That(actualCompany.TipoNegocio, Is.EqualTo(tipoEsperado), $"El TipoNegocio del modelo no es el esperado. Se esperaba {tipoEsperado}");
+         Assert.That(actualCompany.PaisBase, Is.EqualTo(paisEsperado), $"El PaisBase del modelo no es el esperado. Se esperaba {paisEsperado}");
+         Assert.That(actualCompany.ValorEstimado, Is.EqualTo(valorEsperado), $"El ValorEstimado del modelo no es el esperado. Se esperaba {valorEsperado}");
+         Assert.That(actualCompany.EsTransnacional, Is.EqualTo(esTransnacionalEsperado), $"El booleano EsTransnacional del modelo no es el esperado. Se esperaba {esTransnacionalEsperado}");
+    }
+
+    [Test]
+    public async Task GetEdit_ReturnsNotFound_WithNotRealModelId()
+    {
+        // arrange
+        int idFalso = -1;
+
+        // action
+        var result = await CompanyController.Edit(idFalso);
+
+        // assert
+        Assert.That(result, Is.TypeOf<NotFoundResult>(), "No se retorno una vista de NotFound cuando se recibio un id inválido");
+    }
+
+    #region TypeoOfCompanyAssert
+    private void AssertComapanyModelType(Object model)
+    {
+        Assert.That(model, Is.TypeOf<CompanyModel>(), "No se retorno un modelo de tipo companyModel");
+    }
+    #endregion TypeoOfCompanyAssert
+
 }
