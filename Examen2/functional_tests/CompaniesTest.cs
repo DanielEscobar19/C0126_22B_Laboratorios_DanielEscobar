@@ -91,7 +91,7 @@ namespace functional_tests
         }
 
         /// <summary>
-        /// test de la operacin read
+        /// test de la operacion read
         /// </summary>
         /// <objetivo>
         /// la prueba ingresa empresas semilla en la base y comprueba que se vea en la vista index de la aplicacion
