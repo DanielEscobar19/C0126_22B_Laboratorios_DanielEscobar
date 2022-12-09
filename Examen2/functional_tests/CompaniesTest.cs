@@ -15,9 +15,9 @@ namespace functional_tests
         private CompanyContext _DbContext;
         private List<CompanyModel>? EmpresasSemilla;
         MainPage? MainPage;
+        private const string UNIQUEID = "FXc21c02748";
 
-
-    [SetUp]
+        [SetUp]
         public void Setup()
         {
             Driver = new ChromeDriver();
@@ -53,7 +53,7 @@ namespace functional_tests
                 CompanyModel tempCompany = new CompanyModel
                 {
                     Nombre = "Testing " + i,
-                    TipoNegocio = "Negocio de testing " + i,
+                    TipoNegocio = $"Negocio de testing {i} {UNIQUEID}",
                     PaisBase = "Pais testing " + 1,
                     ValorEstimado = 1000.15m,
                     EsTransnacional = true
@@ -65,8 +65,6 @@ namespace functional_tests
                 EmpresasSemilla.Add(tempCompany);
             }
 
-            // ingresamos en la base los puestos semilla
-            // _DbContext.AddRange(EmpresasSemilla.ToArray());
             // guardamos en la base los cambios realizados
             _DbContext.SaveChanges();
 
@@ -100,9 +98,9 @@ namespace functional_tests
             CompanyInputs createPage = new(Driver);
 
             CompanyModel nuevaEmpresa = new CompanyModel{
-                Nombre = "Nombre no repetido 456789",
-                PaisBase = "Pais no repetido 456789",
-                TipoNegocio = "Tipo negocio no repetido 456789",
+                Nombre = $"Nombre no repetido {UNIQUEID}",
+                PaisBase = $"Pais no repetido {UNIQUEID}",
+                TipoNegocio = $"Tipo negocio no repetido {UNIQUEID}",
             };
 
             // action
@@ -147,7 +145,7 @@ namespace functional_tests
             // creamos una empresa a borrar
             // solo es necesario ponerle un nombre unico para borrarla
             CompanyModel borrarCompany = new(){
-                Nombre = "Empresa a borrar 45678"
+                Nombre = $"Empresa a borrar {UNIQUEID}"
             };
 
             // actualiza el modelo segun la base para obtener el id de la base
@@ -178,10 +176,10 @@ namespace functional_tests
             // arrange 
             CompanyModel empresaActualizar = new CompanyModel
             {
-                Nombre = "Nombre pre actualizacion 456789",
+                Nombre = $"Nombre pre actualizacion {UNIQUEID}",
                 ValorEstimado = 1909.56m,
-                PaisBase = "Pais pre actualizacion 456789",
-                TipoNegocio = "Tipo negocio pre actualizacion 456789",
+                PaisBase = $"Pais pre actualizacion {UNIQUEID}",
+                TipoNegocio = $"Tipo negocio pre actualizacion {UNIQUEID}",
                 EsTransnacional = true
             };
 
@@ -201,10 +199,10 @@ namespace functional_tests
             int indexAEditar = nombresEmpresasEnPantalla.FindIndex(x => x == empresaActualizar.Nombre);
 
             // acualizamos datos del modelo
-            empresaActualizar.Nombre = "Nombre post actualizacion 456789";
+            empresaActualizar.Nombre = $"Nombre post actualizacion {UNIQUEID}";
             empresaActualizar.ValorEstimado = 4587.56m;
-            empresaActualizar.PaisBase = "Pais post actualizacion 456789";
-            empresaActualizar.TipoNegocio = "Tipo negocio post actualizacion 456789";
+            empresaActualizar.PaisBase = $"Pais post actualizacion {UNIQUEID}";
+            empresaActualizar.TipoNegocio = $"Tipo negocio post actualizacion {UNIQUEID}";
             empresaActualizar.EsTransnacional = false;
 
 
