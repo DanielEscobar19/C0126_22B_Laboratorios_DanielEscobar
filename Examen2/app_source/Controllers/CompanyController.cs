@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using app_source.Data;
 using app_source.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace app_source.Controllers
 {
@@ -65,7 +66,9 @@ namespace app_source.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Nombre,TipoNegocio,PaisBase,ValorEstimado,EsTransnacional")] CompanyModel companyModel)
         {
-            if (ModelState.IsValid)
+            JsonResult jsonValidation = IsCompanyNameAvailable(companyModel.Nombre, companyModel.Id);
+            bool CompanyNameValid = Convert.ToBoolean(jsonValidation.Value);
+            if (ModelState.IsValid && CompanyNameValid)
             {
                 _context.Add(companyModel);
                 await _context.SaveChangesAsync();
