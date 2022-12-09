@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace functional_tests.Pages
 {
+    /// <summary>
+    /// Clase que maneja botones y datos de la pagina principal
+    /// Vistas: Index.cshtml
+    /// </summary>
     public class MainPage
     {
         private IWebDriver Driver;
@@ -16,7 +20,9 @@ namespace functional_tests.Pages
             this.Driver = driver;
         }
 
-        // instancia para clickear el boton de agregar una empresa
+        /// <summary>
+        /// instancia para clickear el boton de agregar una empresa
+        /// </summary>
         public IWebElement BotonCrear
         {
             get {
@@ -24,7 +30,9 @@ namespace functional_tests.Pages
             }
         }
 
-        // metodo que retorna los botones de editar de las empresas
+        /// <summary>
+        /// atributo que retorna los botones de editar de las empresas
+        /// </summary>
         public List<IWebElement> BotonesEditar
         {
             get
@@ -33,7 +41,9 @@ namespace functional_tests.Pages
             }
         }
 
-        // metodo que retorna los botones de eliminar de las empresas
+        /// <summary>
+        /// atributo que retorna los botones de editar de las empresas
+        /// </summary>
         public List<IWebElement> BotonesEliminar
         {
             get
@@ -42,7 +52,9 @@ namespace functional_tests.Pages
             }
         }
 
-        // metodo que retorna los nombres de las empresas
+        /// <summary>
+        /// atributo que retorna los nombres de las empresas
+        /// </summary>
         public List<IWebElement> NombresEmpresas
         {
             get
@@ -51,6 +63,9 @@ namespace functional_tests.Pages
             }
         }
 
+        /// <summary>
+        /// atributo que retorna los tipos de negocio de las empresas
+        /// </summary>
         public List<IWebElement> TipoEmpresas
         {
             get
@@ -59,6 +74,9 @@ namespace functional_tests.Pages
             }
         }
 
+        /// <summary>
+        /// atributo que retorna los paises base de las empresas
+        /// </summary>
         public List<IWebElement> PaisEmpresas
         {
             get
@@ -67,6 +85,9 @@ namespace functional_tests.Pages
             }
         }
 
+        /// <summary>
+        /// atributo que retorna los valores estimadosde las empresas
+        /// </summary>
         public List<IWebElement> ValorEmpresas
         {
             get
@@ -75,6 +96,13 @@ namespace functional_tests.Pages
             }
         }
 
+        /// <summary>
+        /// atributo que retorna los booleanos de las empresas indicando si son transnacionales
+        /// </summary>
+        /// <remark>
+        /// los booleanos se muestran en la como texto: Si y No
+        /// por lo que el IWebElement contiene tal texto
+        /// </remark>
         public List<IWebElement> EsTransnacionalEmpresas
         {
             get

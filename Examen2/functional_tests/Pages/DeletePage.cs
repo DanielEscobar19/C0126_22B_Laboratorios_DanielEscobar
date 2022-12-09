@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace functional_tests.Pages
 {
+    /// <summary>
+    /// Clase que maneja los botones de la vista de eliminar
+    /// Vistas: Delet.cshtml
+    /// </summary>
     public class DeletePage
     {
         private IWebDriver Driver;
@@ -15,6 +19,9 @@ namespace functional_tests.Pages
             Driver = driver;
         }
 
+        /// <summary>
+        /// boton con el cual se confirma el borrado de la empresa.
+        /// </summary>
         public IWebElement BotonEliminar
         {
             get
