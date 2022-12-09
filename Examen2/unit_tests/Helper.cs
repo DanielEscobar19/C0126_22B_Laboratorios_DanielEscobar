@@ -9,10 +9,19 @@ using System.Threading.Tasks;
 
 namespace unit_tests
 {
+    /// <summary>
+    /// Clase con metodos que asisten en los test
+    /// </summary>
     public static class Helper
     {
+        /// <summary>
+        /// connection string con la base de datos que se desea usar
+        /// </summary>
         private static string Connectionstring = "Data Source=172.16.202.209;Initial Catalog=C02748;TrustServerCertificate=True;Persist Security Info=True;User ID=C02748;Password=c02748";
 
+        /// <summary>
+        /// instancia que permite acceder y manejar la base de datos
+        /// </summary>
         public static CompanyContext DbContext
         {
             get
@@ -25,6 +34,9 @@ namespace unit_tests
 
         }
 
+        /// <summary>
+        /// Metodo que inserta puestos semilla que se utilzian en los test
+        /// </summary>
         public static void InsertarEmpresasSemilla(ref List<CompanyModel> EmpresasSemilla, CompanyContext dbContext, string uniqueId)
         {
             // ingresamos empresas de prueba
