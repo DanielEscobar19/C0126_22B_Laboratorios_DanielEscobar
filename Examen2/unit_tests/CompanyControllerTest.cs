@@ -167,4 +167,43 @@ public class CompanyControllerTest
     }
     #endregion TypeoOfCompanyAssert
 
+
+    [Test]
+    public async Task DeleteConfirmed_ReturnsRedirectionToIndex_WhenDeleted()
+    {
+        // arrange
+        Helper.InsertarEmpresasSemilla(ref EmpresasSemilla, DbContext, UNIQUEID);
+
+        // action
+        var viewResult = await CompanyController.DeleteConfirmed(EmpresasSemilla[3].Id);
+
+        // eliminamos la empresa para que el teardown elimine el resto
+        EmpresasSemilla.Remove(EmpresasSemilla[3]);
+
+        // assert
+        Assert.That(viewResult, Is.TypeOf<RedirectToActionResult>());
+        var redirectResult = viewResult as RedirectToActionResult;
+        Assert.That(redirectResult.ActionName, Is.EqualTo("Index"), "Se esperaba la action Index");
+    }
+
+    [Test]
+    public async Task DeleteConfirmed_DeletesCompanyInBase()
+    {
+        // arrange
+        Helper.InsertarEmpresasSemilla(ref EmpresasSemilla, DbContext, UNIQUEID);
+
+        // action
+        var viewResult = await CompanyController.DeleteConfirmed(EmpresasSemilla[1].Id);
+
+        // assert
+        List<CompanyModel> empresasEnBase = await DbContext.CompanyModel.ToListAsync();
+
+        // revisamos que no este en la base el que acabamos de elmiminar
+        Assert.IsFalse(empresasEnBase.Any(x => x.Nombre == EmpresasSemilla[1].Nombre));
+
+        // custom cleanup
+        // eliminamos la empresa para que el teardown elimine el resto
+        EmpresasSemilla.Remove(EmpresasSemilla[1]);
+    }
+
 }
