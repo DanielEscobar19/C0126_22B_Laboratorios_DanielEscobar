@@ -3,6 +3,7 @@ using app_source.Data;
 using app_source.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations;
 
 namespace unit_tests;
 
@@ -21,12 +22,12 @@ public class CompanyControllerTest
     }
 
     [TearDown]
-    public void TearDown()
+    public async Task TearDown()
     {
         foreach (var item in EmpresasSemilla) {
             DbContext.Remove(item);
         }
-        DbContext.SaveChanges();
+        await DbContext.SaveChangesAsync();
         EmpresasSemilla.Clear();
         CompanyController = null;
     }
@@ -192,18 +193,99 @@ public class CompanyControllerTest
         // arrange
         Helper.InsertarEmpresasSemilla(ref EmpresasSemilla, DbContext, UNIQUEID);
 
+        string nombreModeloBorrado = EmpresasSemilla[1].Nombre;
+
         // action
         var viewResult = await CompanyController.DeleteConfirmed(EmpresasSemilla[1].Id);
+        
+        // eliminamos la empresa para que el teardown elimine el resto
+        EmpresasSemilla.Remove(EmpresasSemilla[1]);
 
         // assert
         List<CompanyModel> empresasEnBase = await DbContext.CompanyModel.ToListAsync();
 
-        // revisamos que no este en la base el que acabamos de elmiminar
-        Assert.IsFalse(empresasEnBase.Any(x => x.Nombre == EmpresasSemilla[1].Nombre));
+        // revisamos que no este en la base el que acabamos de eliminar
+        Assert.IsFalse(empresasEnBase.Any(x => x.Nombre == nombreModeloBorrado));
+    }
 
-        // custom cleanup
-        // eliminamos la empresa para que el teardown elimine el resto
-        EmpresasSemilla.Remove(EmpresasSemilla[1]);
+    [Test]
+    public async Task PostCreate_ReturnsCreateView_WhenInvalidModel()
+    {
+        // arrange
+        // ingresamos un puesto semilla en la base
+        CompanyModel semilla = new()
+        {
+            Nombre  = $"Semilla Testing {UNIQUEID}"
+        };
+
+        // ingresamos datos a EmpresasSemilla para un buen teardown
+        EmpresasSemilla.Add(DbContext.Add(semilla).Entity);
+        // guardamos cambios en la base
+        await DbContext.SaveChangesAsync();
+
+        CompanyModel nombreRepetido = new()
+        {
+            Nombre = semilla.Nombre
+        };
+
+        // action
+        var viewResult = await CompanyController.Create(nombreRepetido);
+
+        // custom teardown
+        List<CompanyModel> empresasEnBase = await DbContext.CompanyModel.ToListAsync();
+        nombreRepetido = empresasEnBase.Find(x => x.Nombre == nombreRepetido.Nombre);
+        if (nombreRepetido is not null)
+        {
+            EmpresasSemilla.Add(nombreRepetido);
+        }
+
+        // assert
+        Assert.That(viewResult, Is.TypeOf<ViewResult>());
+        var view = (ViewResult) viewResult;
+        Assert.That(view.ViewData.Model, Is.TypeOf<CompanyModel>(), "Se esperaba la vista Create");
+    }
+
+    [Test]
+    public async Task PostCreate_AddsCorrespondingModelToBase()
+    {
+        // arrange
+        // copiamos los datos esperados porque el paso de modelos es por referencia
+        // por lo tanto si comparamos los modelos siemrpe van a tener mismos datos porque hacen referencia al mismo
+        string nombreEsperado = $"Semilla Testing {UNIQUEID}";
+        string tipoEsperado = $"Negocio de testing {UNIQUEID}";
+        string paisEsperado = $"Pais de testing  {UNIQUEID}";
+        Decimal? valorEsperado = 45678.56m;
+        bool esTransnacionalEsperado = true;
+
+        // ingresamos un puesto semilla en la base
+        CompanyModel newCompany = new()
+        {
+            Nombre = nombreEsperado,
+            TipoNegocio = tipoEsperado,
+            PaisBase = paisEsperado,
+            ValorEstimado = valorEsperado,
+            EsTransnacional = esTransnacionalEsperado
+        };
+
+        // action
+        await CompanyController.Create(newCompany);
+
+        // assert
+        List<CompanyModel> empresasEnBase = await DbContext.CompanyModel.ToListAsync();
+        CompanyModel nuevoEnBase = empresasEnBase.Find(x => x.Nombre == newCompany.Nombre);
+
+        // custom teardown
+        if (nuevoEnBase is not null)
+        {
+            EmpresasSemilla.Add(nuevoEnBase);
+        }
+
+
+        Assert.That(nuevoEnBase.Nombre, Is.EqualTo(nombreEsperado), "El nombre en la base no es el esperado");
+        Assert.That(nuevoEnBase.TipoNegocio, Is.EqualTo(tipoEsperado), "El TipoNegocio en la base no es el esperado");
+        Assert.That(nuevoEnBase.PaisBase, Is.EqualTo(paisEsperado), "El PaisBase en la base no es el esperado");
+        Assert.That(nuevoEnBase.ValorEstimado, Is.EqualTo(valorEsperado), "El ValorEstimado en la base no es el esperado");
+        Assert.That(nuevoEnBase.EsTransnacional, Is.EqualTo(esTransnacionalEsperado), "El booleano EsTransnacional en la base no es el esperado");
     }
 
 }
