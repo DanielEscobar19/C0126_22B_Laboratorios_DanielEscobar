@@ -14,41 +14,46 @@
             <label asp-for="Nombre" class="control-label"></label>
             <div class="input-group mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-default"><i class="bi bi-building"></i></span>
-                <input asp-for="Nombre" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
+                <input asp-for="Nombre" id="inputNombre" class="form-control"/>
             </div>
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+            <br />
 
             <label asp-for="TipoNegocio" class="control-label"></label>
             <div class="input-group mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-default"><i class="bi bi-building-gear"></i></span>
-                <input asp-for="TipoNegocio" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"  class="form-control" />
-                <span asp-validation-for="TipoNegocio" class="text-danger"></span>
+                <input asp-for="TipoNegocio" id="inputTipo" class="form-control" />
             </div>
+            <span asp-validation-for="TipoNegocio" class="text-danger"></span>
+            <br/>
 
 
             <label asp-for="PaisBase" class="control-label"></label>
             <div class="input-group mb-2">
                 <span class="input-group-text" id="inputGroup-sizing-default"><i class="bi bi-globe"></i></span>
-                <input asp-for="PaisBase" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" class="form-control" />
-                <span asp-validation-for="PaisBase" class="text-danger"></span>
+                <input asp-for="PaisBase" id="inputPais" class="form-control" />
             </div>
+             <span asp-validation-for="PaisBase" class="text-danger"></span>
+            <br />
+
 
             <label asp-for="ValorEstimado" class="control-label"></label>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="inputGroup-sizing-default"><i class="bi bi-coin"></i></span>
-                <input asp-for="ValorEstimado" class="form-control" />
-                <span asp-validation-for="ValorEstimado" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" class="text-danger"></span>
+                <input asp-for="ValorEstimado" id="inputValor"  class="form-control" />
             </div>
+            <span asp-validation-for="ValorEstimado" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" class="text-danger"></span>
+            <br />
 
             <div class="input-group mb-3">
                 <div class="input-group-text">
-                    <input class="form-check-input" asp-for="EsTransnacional" />
+                    <input class="form-check-input" id="inputEsTransnacional" asp-for="EsTransnacional" />
                 </div>
                 <p class="form-control m-0"> @Html.DisplayNameFor(model => model.EsTransnacional) </p>
             </div>
             <div class="d-flex justify-content-center">
-                <input type="submit" value="Agregar" class="me-2 btn btn-success" />
-                <a asp-action="Index" class="ms-2 btn btn-danger">Cancelar</a>
+                <input type="submit" name="botonAceptar" value="Agregar" class="me-2 btn btn-success" />
+                <a asp-action="Index" name="botonCancelar" class="ms-2 btn btn-danger">Cancelar</a>
             </div>
         </form>
     </div>

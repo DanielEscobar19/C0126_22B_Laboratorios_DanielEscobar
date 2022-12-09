@@ -8,7 +8,7 @@
 
 <div class="d-flex justify-content-between my-3">
     <span class="h2 m-0">Lista de empresas</span>
-    <a asp-action="Create" class="btn btn-primary text-center">Agregar empresa</a>
+    <a name="botonAgregarEmpresa" asp-action="Create" class="btn btn-primary text-center">Agregar empresa</a>
 </div>
 <table class="table table-hover table-primary">
     <thead>
@@ -34,10 +34,10 @@
     <tbody>
 @foreach (var item in Model) {
             <tr class="text-center align-middle ">
-            <td>
+            <td id="nombreEmpresa">
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
-            <td>
+            <td id="tipoNegocio">
                 @if (item.TipoNegocio == null) {
                         <p class="m-0 p-0">Desconocido</p>
                 } else
@@ -45,7 +45,7 @@
                     @Html.DisplayFor(modelItem => item.TipoNegocio)
                 }
             </td>
-            <td>
+            <td id="paisBase">
                 @if (item.PaisBase == null)
                 {
                     <p class="m-0 p-0">Desconocido</p>
@@ -55,7 +55,7 @@
                     @Html.DisplayFor(modelItem => item.PaisBase)
                 }
             </td>
-            <td>
+            <td id="valorEstimado">
                 @if (item.ValorEstimado == null)
                 {
                     <p class="m-0 p-0">Desconocido</p>
@@ -65,7 +65,7 @@
                     @Html.DisplayFor(modelItem => item.ValorEstimado)
                 }
             </td>
-            <td>
+            <td id="esTransnacional">
                 @if (item.EsTransnacional == true)
                 {
                     <p class="m-0 p-0">Sí</p>
@@ -76,8 +76,8 @@
                 }
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id" class="hovertext btn btn-primary my-1" data-hover="Editar empresa"><i class="bi bi-pencil-square"></i></a>
-                <a asp-action="Delete" asp-route-id="@item.Id" class="hovertext btn btn-danger" data-hover="Eliminar empresa"><i class="bi bi-trash"></i></a>
+                <a asp-action="Edit" asp-route-id="@item.Id" name="botonEditarEmpresa" class="hovertext btn btn-primary my-1" data-hover="Editar empresa"><i class="bi bi-pencil-square"></i></a>
+                <a asp-action="Delete" asp-route-id="@item.Id" name="botonEliminarEmpresa" class="hovertext btn btn-danger" data-hover="Eliminar empresa"><i class="bi bi-trash"></i></a>
             </td>
         </tr>
 }
